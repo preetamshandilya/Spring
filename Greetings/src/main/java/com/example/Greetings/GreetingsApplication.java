@@ -1,13 +1,13 @@
-package com.example.Welcome;
+package com.example.Greetings;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WelcomeApplication {
+public class GreetingsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WelcomeApplication.class, args);
+		SpringApplication.run(GreetingsApplication.class, args);
 	}
 
 }
