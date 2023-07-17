@@ -11,12 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-
 public class GreetingController {
+
     @Autowired
     public GreetingService service;
+
+    public static final Logger logger= LoggerFactory.getLogger(GreetingController.class);
     @GetMapping("/welcome")
     public @ResponseBody String greeting(){
+        logger.info("Greeting Controller executed!");
         return service.message();
+
     }
 }
+
+

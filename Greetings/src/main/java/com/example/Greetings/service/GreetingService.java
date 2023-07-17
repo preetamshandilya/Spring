@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 
 public class GreetingService {
-    Logger logger= LoggerFactory.getLogger(GreetingService.class);
+    public static final Logger logger= LoggerFactory.getLogger(GreetingService.class);
 
     public String message(){
         logger.info("I'm up!");
