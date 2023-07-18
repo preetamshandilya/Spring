@@ -15,8 +15,8 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @WebMvcTest(GreetingController.class)
-public class TestController {
-    private static final Logger logger = LoggerFactory.getLogger(TestController.class);
+public class GreetingsTestController {
+    private static final Logger logger = LoggerFactory.getLogger(GreetingsTestController.class);
 
     @Autowired
     private MockMvc mockMvc;
