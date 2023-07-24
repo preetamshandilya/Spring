@@ -16,7 +16,7 @@ public class StudentResponseBody {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public StudentResponseBody(Integer id, String name, String department, int year, float cgpa, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public StudentResponseBody(Integer id, String name, String department, int year, float cgpa ,LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.department = department;

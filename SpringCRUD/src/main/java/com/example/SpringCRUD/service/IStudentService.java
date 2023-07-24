@@ -2,7 +2,7 @@ package com.example.SpringCRUD.service;
 
 import com.example.SpringCRUD.dto.StudentRequestBody;
 import com.example.SpringCRUD.dto.StudentResponseBody;
-import com.example.SpringCRUD.entity.Student;
+import com.example.SpringCRUD.model.Student;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.SpringCRUD.entity;
+package com.example.SpringCRUD.model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
