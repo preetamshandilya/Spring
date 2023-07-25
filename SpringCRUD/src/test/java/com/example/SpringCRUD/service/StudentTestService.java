@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
 
 @WebMvcTest
 
-public class CrudServiceTest {
+public class StudentTestService {
     @Autowired
     private MockMvc mockMvc;
 
@@ -42,12 +42,12 @@ public class CrudServiceTest {
 
         MockitoAnnotations.openMocks(this);
     }
-final Logger logger= LoggerFactory.getLogger(CrudServiceTest.class);
+final Logger logger= LoggerFactory.getLogger(StudentTestService.class);
 
     @Test
     public void createTest() throws Exception{
         logger.info("createTest method executed!");
-
+//prepare test data
         StudentRequestBody requestBody=new StudentRequestBody();
         requestBody.setName("John Elliot");
         requestBody.setDepartment("Computer Science");
