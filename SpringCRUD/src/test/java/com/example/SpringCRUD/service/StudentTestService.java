@@ -16,21 +16,18 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 
 @WebMvcTest
-
 public class StudentTestService {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
     private StudentRepository studentRepository;
-
 
     @MockBean
     @Autowired
@@ -47,7 +44,7 @@ final Logger logger= LoggerFactory.getLogger(StudentTestService.class);
     @Test
     public void createTest() throws Exception{
         logger.info("createTest method executed!");
-//prepare test data
+        //prepare test data
         StudentRequestBody requestBody=new StudentRequestBody();
         requestBody.setName("John Elliot");
         requestBody.setDepartment("Computer Science");
@@ -61,7 +58,7 @@ final Logger logger= LoggerFactory.getLogger(StudentTestService.class);
         student.setCgpa(requestBody.getCgpa());
         when(studentRepository.save(any(Student.class))).thenReturn(student);
 
-// Mock the behavior of the create method in IStudentService
+        // Mock the behavior of the create method in IStudentService
         when(studentService.create(any(StudentRequestBody.class))).thenAnswer(invocation -> {
             StudentRequestBody request = invocation.getArgument(0);
             StudentResponseBody responseBody = new StudentResponseBody();
@@ -116,7 +113,7 @@ final Logger logger= LoggerFactory.getLogger(StudentTestService.class);
         }
         // Mock the behavior of the read method in IStudentService
         when(studentService.read()).thenReturn(expectedResponse);
-// Perform the test
+        // Perform the test
         List<StudentResponseBody> result = studentService.read();
         // Assertions
         assertNotNull(result);
@@ -137,7 +134,7 @@ final Logger logger= LoggerFactory.getLogger(StudentTestService.class);
 
         when(studentRepository.findById(student.getId())).thenReturn(Optional.of(student));
 
-// Mock the behavior of the delete method in IStudentService
+        // Mock the behavior of the delete method in IStudentService
         when(studentService.delete(student.getId())).thenReturn("deleted successfully!");
 
         // Perform the test
@@ -188,7 +185,6 @@ final Logger logger= LoggerFactory.getLogger(StudentTestService.class);
 
         // Perform the test
         String result = studentService.update(newStudent);
-        // Retrieve the updated student from the repository
 
         // Assertions
         assertEquals("Updated Successfully!", result);

@@ -1,0 +1,13 @@
+//        Specification<Student> spec = (root, query, cb) -> { // specification allows us to specify filtering criteria
+//            List<Predicate> predicates = new ArrayList<>(); // predicate is used to filter the query result
+//            filters.forEach((key, value) -> {
+//                if (value != null) {
+//                    predicates.add(cb.equal(root.get(key), value));
+//                }
+//            });
+//            return cb.and(predicates.toArray(new Predicate[0]));
+//        };
+
+,Map<String,Object> filters
+
+Predicate predicate = builder.conjunction();: We start by initializing an empty predicate. A predicate is used to represent conditions in the WHERE clause of an SQL query.

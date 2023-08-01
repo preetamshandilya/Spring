@@ -3,13 +3,14 @@ package com.example.SpringCRUD.model;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "students")
 
-public class Student {
+public class Student extends RepresentationModel<Student> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;

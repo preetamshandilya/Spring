@@ -2,10 +2,11 @@ package com.example.SpringCRUD.dto;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.time.LocalDateTime;
 
-public class StudentResponseBody {
+public class StudentResponseBody extends RepresentationModel<StudentResponseBody> {
     private Integer id;
     private String name;
     private String department;
