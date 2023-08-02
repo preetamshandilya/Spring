@@ -11,3 +11,6 @@
 ,Map<String,Object> filters
 
 Predicate predicate = builder.conjunction();: We start by initializing an empty predicate. A predicate is used to represent conditions in the WHERE clause of an SQL query.
+
+
+https://chat.openai.com/share/1166a35a-50f3-4166-bd1f-6874d9b7ac76
