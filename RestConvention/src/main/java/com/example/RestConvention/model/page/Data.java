@@ -1,9 +1,11 @@
 package com.example.RestConvention.model.page;
 
 import com.example.RestConvention.model.entity.Article;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class Data <T>{
     private int pageNumber;
     private int pageSize;
@@ -20,32 +22,16 @@ public class Data <T>{
     public Data() {
     }
 
-    public int getPageNumber() {
-        return pageNumber;
-    }
-
     public void setPageNumber(int pageNumber) {
         this.pageNumber = pageNumber;
-    }
-
-    public int getPageSize() {
-        return pageSize;
     }
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
 
-    public int getMaxAvailablePage() {
-        return maxAvailablePage;
-    }
-
     public void setMaxAvailablePage(int maxAvailablePage) {
         this.maxAvailablePage = maxAvailablePage;
-    }
-
-    public List<Article> getArticles() {
-        return articles;
     }
 
     public void setArticles(List<Article> articles) {

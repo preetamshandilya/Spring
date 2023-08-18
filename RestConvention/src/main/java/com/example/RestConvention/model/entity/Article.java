@@ -12,6 +12,7 @@ import org.springframework.hateoas.RepresentationModel;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -40,5 +41,40 @@ public class Article extends RepresentationModel<Article> {
 
     @OneToMany(mappedBy = "article",cascade = CascadeType.ALL)
     private List<Comment> commentList;
+
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
+
+
 
 }

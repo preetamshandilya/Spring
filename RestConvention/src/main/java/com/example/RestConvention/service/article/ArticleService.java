@@ -3,6 +3,7 @@ package com.example.RestConvention.service.article;
 import com.example.RestConvention.model.entity.Article;
 import com.example.RestConvention.model.page.ArticlePage;
 import com.example.RestConvention.model.page.Data;
+import com.example.RestConvention.model.page.HttpStatus;
 import com.example.RestConvention.repository.ArticleRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.criteria.Predicate;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ArticleService implements IArticleService {
+public class ArticleService implements IArticleService  {
     @Autowired
     private ArticleRepository articleRepository;
     @Override
@@ -66,40 +67,54 @@ public class ArticleService implements IArticleService {
 
     @Override
     public ArticlePage<Article> page(int offset, int pageSize, String sortBy, String sortOrder, List<String> authorFilter, List<String> categoryFilter) {
+        try {
+            Sort.Direction direction = Sort.Direction.ASC;
+            if (sortOrder != null && sortOrder.equalsIgnoreCase("desc")) {
+                direction = Sort.Direction.DESC;
+            }
 
-        Sort.Direction direction= Sort.Direction.ASC;
-        if(sortOrder != null && sortOrder.equalsIgnoreCase("desc")){
-            direction= Sort.Direction.DESC;
+            Specification<Article> specification = (root, query, builder) -> {
+                Predicate predicate = builder.conjunction();
+
+                if (authorFilter != null && !authorFilter.isEmpty()) {
+                    predicate = builder.and(predicate, root.get("author").in(authorFilter));
+                }
+
+                if (categoryFilter != null && !categoryFilter.isEmpty()) {
+                    predicate = builder.and(predicate, root.get("category").in(categoryFilter));
+                }
+
+                return predicate;
+
+            };
+            Page<Article> page = articleRepository.findAll(specification, PageRequest.of(offset, pageSize, direction, sortBy));
+
+
+            ArticlePage<Article> articlePage = new ArticlePage<>();
+            HttpStatus<Article> httpStatus=new HttpStatus<>();
+            httpStatus.setStatusCode(200);
+            httpStatus.setStatusMessage("Success");
+            articlePage.setStatus(httpStatus);
+
+            //articlePage.setPage(page);
+
+            Data<Article> articleData = new Data<>();
+            articleData.setArticles(page.getContent());
+            articleData.setPageNumber(page.getNumber()+1);
+            articleData.setPageSize(page.getSize());
+            articleData.setMaxAvailablePage(page.getTotalPages());
+            articlePage.setData(articleData);
+
+
+
+            return articlePage;
+        } catch (Exception e) {
+            ArticlePage<Article> errorPage = new ArticlePage<>();
+            HttpStatus<Article> errorStatus = new HttpStatus<>();
+            errorStatus.setStatusCode(500); // Using the status code directly
+            errorStatus.setStatusMessage("Error: " + e.getMessage()); // Set the error message
+            errorPage.setStatus(errorStatus);
+            return errorPage;
         }
-
-        Specification<Article> specification = (root, query, builder) -> {
-            Predicate predicate = builder.conjunction();
-
-            if (authorFilter != null && !authorFilter.isEmpty()) {
-                predicate = builder.and(predicate, root.get("author").in(authorFilter));
-            }
-
-            if(categoryFilter!=null && !categoryFilter.isEmpty()){
-                predicate=builder.and(predicate,root.get("category").in(categoryFilter));
-            }
-
-            return predicate;
-
-        };
-        Page<Article> page=articleRepository.findAll(specification, PageRequest.of(offset,pageSize,direction,sortBy));
-
-
-        ArticlePage<Article> articlePage = new ArticlePage<>();
-
-        //articlePage.setPage(page);
-
-        Data<Article> articleData=new Data<>();
-        articleData.setArticles(page.getContent());
-        articleData.setPageNumber(page.getNumber());
-        articleData.setPageSize(page.getSize());
-        articleData.setMaxAvailablePage(page.getTotalPages());
-        articlePage.setData(articleData);
-
-        return articlePage;
     }
 }

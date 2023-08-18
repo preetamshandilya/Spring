@@ -4,15 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.domain.Page;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 
-public class ArticlePage <T>{
-   // private Page<T> page;
-    private Data<T> data;
-    private HttpStatus<T> status;
+public class HttpStatus <T>{
+    private int statusCode;
+    private String statusMessage;
+
 }
